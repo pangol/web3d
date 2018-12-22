@@ -12,6 +12,7 @@
   <body>
     <div id="world"></div>
     <script src="js/three.js"></script>
+    <script src="js/controls/OrbitControls.js"></script>
     <script src="js/Lensflare.js"></script>
     <script>
       var SCREEN_WIDTH, SCREEN_HEIGHT;
@@ -77,13 +78,21 @@
 
       }
 
+      var controls
+      function createControls(){
+        controls = new THREE.OrbitControls( camera, renderer.domElement );
+				controls.enableDamping = true;
+				controls.dampingFactor = 0.25;
+				controls.rotateSpeed = 0.35;
+      }
+
       var planet;
       var smallPlanet;
 
       function init(){
         createScene();
         createStar();
-        
+        createControls();
         planet = createPlanet(0xffffff,1, 30);
         smallPlanet = createPlanet(0x00ff00, 0.5, 20);
         planet.add(smallPlanet);
